@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import JobsList from "./components/Jobs/JobsList";
-import Filter from "./components/Jobs/Filter";
-import data from "./data.json";
+import Filter from "./components/Filter/Filter";
+import data from "./assets/data.json";
 
 function App() {
   const [categories, setCategories] = useState([]);
@@ -9,24 +9,32 @@ function App() {
 
   //This will add  category to the array, whcih we will use to display in the bar at the top
   const filterCategories = (category) => {
-    setCategories((prevs) => {
-      if (!prevs.includes(category)) {
-        return [...prevs, category];
+    setCategories((prevsState) => {
+      if (!prevsState.includes(category)) {
+        return [...prevsState, category];
       }
-      return prevs;
+      return prevsState;
     });
 
     //this line of code gave me a headache. Pls, don't judge the messy synptax :(
     // we are filtering jobs based languages, tools, level or role
     setPostedJobs((prevs) => {
-      return prevs.filter(
-        (job) =>
+      return prevs.filter((job) => {
+        return (
           job.languages.includes(category) ||
           job.tools.includes(category) ||
           job.level === category ||
           job.role === category
-      );
+        );
+      });
     });
+  };
+
+  //not sure how to do it
+  const filterCategoriesOut = (category) => {
+    setCategories((prevsState) =>
+      prevsState.filter((state) => state !== category)
+    );
   };
 
   const resetFilter = () => {
@@ -37,6 +45,7 @@ function App() {
   return (
     <>
       <Filter
+        filterCategoriesOut={filterCategoriesOut}
         resetFilter={resetFilter}
         categories={categories}
       />
