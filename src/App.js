@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import JobsList from "./components/Jobs/JobsList";
 import Filter from "./components/Filter/Filter";
+import Header from "./components/Header/Header";
 import data from "./assets/data.json";
 
 function App() {
@@ -30,13 +31,6 @@ function App() {
     });
   };
 
-  //not sure how to do it
-  const filterCategoriesOut = (category) => {
-    setCategories((prevsState) =>
-      prevsState.filter((state) => state !== category)
-    );
-  };
-
   const resetFilter = () => {
     setPostedJobs(data);
     setCategories([]);
@@ -44,11 +38,8 @@ function App() {
 
   return (
     <>
-      <Filter
-        filterCategoriesOut={filterCategoriesOut}
-        resetFilter={resetFilter}
-        categories={categories}
-      />
+      <Header/>
+      <Filter resetFilter={resetFilter} categories={categories} />
       <JobsList filterCategories={filterCategories} jobs={postedJobs} />
     </>
   );

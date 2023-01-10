@@ -10,6 +10,10 @@ body {
   font-size: 18px;
 }
 
+#header {
+  width: 100%;
+}
+
 #root {
   display: flex;
   flex-direction: column;
@@ -26,6 +30,12 @@ body {
 /* destop view width: 62%; */
 @media (min-width: 1024px) {
   #root {
-    width:60%;
+    width: 60%;
+  }
+}
+
+@media (min-width: 1930px) {
+  #root {
+    width: 52%;
   }
 }
